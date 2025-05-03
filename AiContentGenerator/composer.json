@@ -19,6 +19,10 @@
           "mayank\\AiContentGenerator\\AiContentGeneratorServiceProvider"
         ]
       }
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
     }
-  }
-  
+}
