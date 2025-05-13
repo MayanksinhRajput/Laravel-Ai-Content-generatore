@@ -244,4 +244,60 @@ class AiContentGenerator
             throw new Exception("Failed to generate content variations: " . $e->getMessage(), 0, $e);
         }
     }
+
+    /**
+     * Generate a blog post about a specific topic.
+     *
+     * @param  string  $topic
+     * @param  array  $options
+     * @return string
+     * @throws \Exception If content generation fails
+     */
+    public function generateBlogPost(string $topic, array $options = []): string
+    {
+        $prompt = "Write a comprehensive blog post about {$topic}. Include an engaging introduction, main points with supporting details, and a conclusion. Make it informative and engaging.";
+        
+        return $this->generateContent($prompt, array_merge([
+            'temperature' => 0.8,
+            'max_tokens' => 2048,
+        ], $options));
+    }
+
+    /**
+     * Generate a product description.
+     *
+     * @param  string  $product
+     * @param  array  $options
+     * @return string
+     * @throws \Exception If content generation fails
+     */
+    public function generateProductDescription(string $product, array $options = []): string
+    {
+        $prompt = "Write a compelling product description for {$product}. Include key features, benefits, and a call to action. Make it persuasive and professional.";
+        
+        return $this->generateContent($prompt, array_merge([
+            'temperature' => 0.7,
+            'max_tokens' => 1024,
+        ], $options));
+    }
+
+    /**
+     * Generate a social media post.
+     *
+     * @param  string  $topic
+     * @param  string  $platform
+     * @param  array  $options
+     * @return string
+     * @throws \Exception If content generation fails
+     */
+    public function generateSocialMediaPost(string $topic, string $platform, array $options = []): string
+    {
+        $platform = strtolower($platform);
+        $prompt = "Write an engaging {$platform} post about {$topic}. Make it appropriate for {$platform}'s style and character limit. Include relevant hashtags if appropriate.";
+        
+        return $this->generateContent($prompt, array_merge([
+            'temperature' => 0.9,
+            'max_tokens' => 512,
+        ], $options));
+    }
 } 

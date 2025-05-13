@@ -25,6 +25,8 @@ class AiContentGeneratorServiceProvider extends ServiceProvider
             
             return new AiContentGenerator($apiKey);
         });
+
+        $this->app->alias('ai-content-generator', AiContentGenerator::class);
     }
 
     /**
@@ -35,5 +37,11 @@ class AiContentGeneratorServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../config/ai-content-generator.php' => config_path('ai-content-generator.php'),
         ], 'ai-content-generator-config');
+
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                // Add any console commands here if needed
+            ]);
+        }
     }
 } 

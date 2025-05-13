@@ -1,6 +1,6 @@
-# AI Content Generator for Laravel
+# Laravel AI Content Generator
 
-A Laravel package for AI-powered content generation using Google Gemini.
+A powerful Laravel package for AI-powered content generation using Google's Gemini API. This package makes it easy to generate various types of content including blog posts, product descriptions, and social media posts.
 
 ## Installation
 
@@ -10,63 +10,125 @@ You can install the package via composer:
 composer require mayank/ai-content-generator
 ```
 
-## Configuration
-
-Publish the config file:
+After installing the package, publish the configuration file:
 
 ```bash
-php artisan vendor:publish --tag=ai-content-generator-config
+php artisan vendor:publish --provider="mayank\AiContentGenerator\AiContentGeneratorServiceProvider" --tag="ai-content-generator-config"
 ```
 
 Add your Gemini API key to your `.env` file:
 
 ```
-GEMINI_API_KEY=your-api-key
+GEMINI_API_KEY=your-api-key-here
 ```
 
 ## Usage
 
-### Generate Content
+### Basic Usage
+
+You can use the package in two ways:
+
+1. Using the Facade:
 
 ```php
-use mayank\AiContentGenerator\Facades\AiContentGenerator;
+use mayank\AiContentGenerator\AiContentGeneratorFacade as AI;
 
-// Simple content generation
-$content = AiContentGenerator::generateContent('Write a blog post about Laravel and AI');
-
-// Generate content with an image
-$content = AiContentGenerator::generateContentWithImage(
-    'Describe this image',
-    storage_path('app/images/example.jpg')
-);
-
-// Generate multiple variations
-$variations = AiContentGenerator::generateVariations(
-    'Write a tagline for a tech company',
-    3 // Number of variations
-);
-```
-
-### Image-Based Content Generation
-
-For image-based content generation, make sure the image file exists at the specified path. The package requires the full path to the image file.
-
-```php
-// Make sure the directory exists
-Storage::makeDirectory('temp');
-
-// Save the image (example for handling uploads)
-$path = $request->file('image')->store('temp');
-$fullPath = storage_path('app/' . $path);
+// Generate content
+$content = AI::generateContent('Write about artificial intelligence');
 
 // Generate content with image
-$content = AiContentGenerator::generateContentWithImage(
-    'Analyze this image and describe what you see',
-    $fullPath
-);
+$content = AI::generateContentWithImage('Describe this image', 'path/to/image.jpg');
+
+// Generate multiple variations
+$variations = AI::generateVariations('Write a tagline for a tech company', 3);
 ```
 
-> **Note**: Make sure the storage directories exist and have appropriate permissions. For image uploads, you need to create the necessary directories first (e.g., `storage/app/temp`).
+2. Using Dependency Injection:
+
+```php
+use mayank\AiContentGenerator\AiContentGenerator;
+
+class YourController extends Controller
+{
+    protected $ai;
+
+    public function __construct(AiContentGenerator $ai)
+    {
+        $this->ai = $ai;
+    }
+
+    public function generate()
+    {
+        $content = $this->ai->generateContent('Your prompt here');
+    }
+}
+```
+
+### Helper Methods
+
+The package includes several helper methods for common content generation tasks:
+
+```php
+// Generate a blog post
+$blogPost = AI::generateBlogPost('The Future of AI');
+
+// Generate a product description
+$description = AI::generateProductDescription('Smart Home Assistant');
+
+// Generate a social media post
+$post = AI::generateSocialMediaPost('New Product Launch', 'twitter');
+```
+
+### Configuration
+
+The package configuration file (`config/ai-content-generator.php`) includes the following options:
+
+```php
+return [
+    'gemini_api_key' => env('GEMINI_API_KEY', ''),
+    'default_model' => env('GEMINI_DEFAULT_MODEL', 'gemini-pro'),
+    'parameters' => [
+        'temperature' => 0.7,
+        'max_output_tokens' => 1024,
+        'top_p' => 0.9,
+        'top_k' => 40,
+    ],
+];
+```
+
+### Advanced Usage
+
+You can customize the generation parameters for each request:
+
+```php
+$content = AI::generateContent('Your prompt', [
+    'temperature' => 0.8,
+    'max_tokens' => 2048,
+    'top_p' => 0.95,
+    'top_k' => 50,
+]);
+```
+
+## Error Handling
+
+The package includes comprehensive error handling:
+
+```php
+try {
+    $content = AI::generateContent('Your prompt');
+} catch (\Exception $e) {
+    // Handle the error
+    Log::error('Content generation failed: ' . $e->getMessage());
+}
+```
+
+## Contributing
+
+Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+
+## Security
+
+If you discover any security related issues, please email security@example.com instead of using the issue tracker.
 
 ## License
 
