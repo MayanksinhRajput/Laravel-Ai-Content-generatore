@@ -1,6 +1,6 @@
 <?php
 
-namespace mayank\AiContentGenerator;
+namespace mayanksinh\AiContentGenerator;
 
 use Illuminate\Support\Facades\Facade;
 
@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static string generateProductDescription(string $product, array $options = [])
  * @method static string generateSocialMediaPost(string $topic, string $platform, array $options = [])
  * 
- * @see \mayank\AiContentGenerator\AiContentGenerator
+ * @see \mayanksinh\AiContentGenerator\AiContentGenerator
  */
 class AiContentGeneratorFacade extends Facade
 {

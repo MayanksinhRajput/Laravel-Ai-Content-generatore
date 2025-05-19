@@ -7,7 +7,7 @@ A Laravel package for AI-powered content generation using Google Gemini.
 You can install the package via composer:
 
 ```bash
-composer require mayank/ai-content-generator
+composer require mayanksinh/ai-content-generator
 ```
 
 ## Configuration
@@ -29,7 +29,7 @@ GEMINI_API_KEY=your-api-key
 ### Generate Content
 
 ```php
-use mayank\AiContentGenerator\Facades\AiContentGenerator;
+use mayanksinh\AiContentGenerator\Facades\AiContentGenerator;
 
 // Simple content generation
 $content = AiContentGenerator::generateContent('Write a blog post about Laravel and AI');

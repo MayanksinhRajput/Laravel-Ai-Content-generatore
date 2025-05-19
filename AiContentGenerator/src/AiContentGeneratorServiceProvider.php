@@ -1,6 +1,6 @@
 <?php
 
-namespace mayank\AiContentGenerator;
+namespace mayanksinh\AiContentGenerator;
 
 use Illuminate\Support\ServiceProvider;
 

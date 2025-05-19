@@ -1,6 +1,6 @@
 <?php
 
-namespace mayank\AiContentGenerator\Facades;
+namespace mayanksinh\AiContentGenerator\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static string generateContentWithImage(string $prompt, string $imagePath, array $options = [])
  * @method static array generateVariations(string $prompt, int $count = 3)
  * 
- * @see \mayank\AiContentGenerator\AiContentGenerator
+ * @see \mayanksinh\AiContentGenerator\AiContentGenerator
  */
 class AiContentGenerator extends Facade
 {

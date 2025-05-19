@@ -1,6 +1,6 @@
 <?php
 
-namespace mayank\AiContentGenerator;
+namespace mayanksinh\AiContentGenerator;
 
 use Exception;
 use Illuminate\Support\Facades\Http;

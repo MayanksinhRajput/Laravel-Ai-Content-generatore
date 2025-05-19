@@ -1,11 +1,11 @@
 {
-    "name": "mayank/ai-content-generator",
+    "name": "mayanksinh/ai-content-generator",
     "description": "A Laravel package for AI-powered content generation using Google Gemini.",
     "type": "library",
     "license": "MIT",
     "autoload": {
       "psr-4": {
-        "mayank\\AiContentGenerator\\": "src/"
+          "mayanksinh\\AiContentGenerator\\": "src/"
       }
     },
     "require": {
@@ -16,7 +16,7 @@
     "extra": {
       "laravel": {
         "providers": [
-          "mayank\\AiContentGenerator\\AiContentGeneratorServiceProvider"
+          "mayanksinh\\AiContentGenerator\\AiContentGeneratorServiceProvider"
         ]
       }
     },
